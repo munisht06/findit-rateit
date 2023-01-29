@@ -2,73 +2,56 @@ import React, { useState } from "react";
 import Map, { Marker, Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 // import Popup from "react-map-gl-popup";
-const Maps = ({ places }) => {
+const Maps = (props) => {
+  const [selectedLocation, setSelectedLocation] = useState(null);
   const [viewport, setViewport] = useState({
-    latitude: 29.651634,
-    longitude: -82.343835,
-    zoom: 14,
-    width: "200px",
-    height: "500px",
+    width: '100%',
+    height: '100%',
+    latitude: 37.7577,
+    longitude: -122.4376,
+    zoom: 14
   });
-  const [popupInfo, setPopupInfo] = useState(null);
-
+  // Map.on('load', function () {
+  //   Map.resize();
+  // });
   return (
-    <div style={{ background: "blue" }}>
-      <Map
-        mapboxAccessToken={
-          "pk.eyJ1IjoibXVuaXNodCIsImEiOiJjbGRndWdzNmEwOGkxM29udmVscmZqa2U2In0.sRFf0UR-hz5isxxoSc8JSw"
-        }
-        initialViewState={{
-          longitude: -122.4,
-          latitude: 37.8,
-          zoom: 14,
-        }}
-        style={{ width: 600, height: 400 }}
-        mapStyle="mapbox://styles/mapbox/streets-v9"
-      >
+
+    <Map
+      initialViewState={{
+        longitude: -82.3549,
+        latitude: 29.6436,
+        zoom: 14,
+      }}
+      // style={{ width: "70vw", height: "100vh", position: 'relative' }}
+      mapStyle="mapbox://styles/mapbox/streets-v9"
+      mapboxAccessToken={"pk.eyJ1IjoibXVuaXNodCIsImEiOiJjbGRndWdzNmEwOGkxM29udmVscmZqa2U2In0.sRFf0UR-hz5isxxoSc8JSw"}
+    >
+      {props.places.map((location) =>
         <Marker
-          key={"asdf"}
-          latitude={29.646703}
-          longitude={-82.347481}
-          onClick={(e) => {
-            // If we let the click event propagates to the map, it will immediately close the popup
-            // with `closeOnClick: true`
+          latitude={location.latitude}
+          longitude={location.longitude}
+          anchor="top"
+          onClick={e => {
             e.originalEvent.stopPropagation();
-            setPopupInfo("");
+            setSelectedLocation({ name: location.name, type: location.type })
           }}
         >
-          {/* <Pin /> */}
-        </Marker>
-        {popupInfo && (
-          <Popup
-            anchor="top"
-            longitude={29.646703}
-            latitude={-82.347481}
-            onClose={() => setPopupInfo(null)}
-          >
-            <div>"nay nay"</div>
-          </Popup>
-        )}
-      </Map>
 
-      {/* <Map
-        {...viewport}
-        mapboxAccessToken={
-          "pk.eyJ1IjoibXVuaXNodCIsImEiOiJjbGRndWdzNmEwOGkxM29udmVscmZqa2U2In0.sRFf0UR-hz5isxxoSc8JSw"
-        }
-        //   mapboxApiAccessToken={"pk.eyJ1IjoibXVuaXNodCIsImEiOiJjbGRndWdzNmEwOGkxM29udmVscmZqa2U2In0.sRFf0UR-hz5isxxoSc8JSw"}
-        onViewportChange={(newViewport) => setViewport(newViewport)}
-      >
-        {/* {places.map((place) => (
-        <Marker
-          key={place.name}
-          latitude={29.651634}
-          longitude={29.651634}
+        </Marker>)}
+      {selectedLocation && (
+        <Popup
+          latitude={29.6436}
+          longitude={-82.3549}
+          onClose={() => setSelectedLocation(null)}
         >
-          <div>{place.name}</div>
-        </Marker>
-      ))} */}
-    </div>
+          <div>
+            <h2>{selectedLocation.name}</h2>
+            <p>Type: {selectedLocation.type}</p>
+          </div>
+        </Popup>
+
+      )}
+    </Map>
   );
 };
 
