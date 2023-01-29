@@ -15,11 +15,11 @@ import Pin from "./Pin";
 const Maps = ({ places }) => {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [viewport, setViewport] = useState({
-    latitude: 29.651634,
-    longitude: -82.343835,
-    zoom: 14,
-    width: "200px",
-    height: "500px",
+    width: '100%',
+    height: '100%',
+    latitude: 37.7577,
+    longitude: -122.4376,
+    zoom: 14
   });
 
   // const [popupInfo, setPopupInfo] = useState(true);

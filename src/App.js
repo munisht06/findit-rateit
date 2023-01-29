@@ -6,6 +6,8 @@ const campusAmenities = [
   {
     name: "UF Health Staff Parking",
     type: "parking",
+    latitude: 29.6455,
+    longitude: -82.3487,
     rating: 3,
     lat: 29.638986,
     long: -82.348051,
