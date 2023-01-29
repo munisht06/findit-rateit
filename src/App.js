@@ -1,10 +1,10 @@
 import logo from './logo.svg';
 import Map from './Maps';
 import './App.css';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
+// import { makeStyles } from '@material-ui/core/styles';
+import Card from '@mui/material/core/Card';
+import CardContent from '@mui/material/core/CardContent';
+import Typography from '@mui/material/core/Typography';
 
 const campusAmenities = [
   {
@@ -144,17 +144,17 @@ function LocationList() {
   );
 }
 
-const useStyles = makeStyles({
-  root: {
-      minWidth: 275,
-  },
-});
+// const useStyles = makeStyles({
+//   root: {
+//       minWidth: 275,
+//   },
+// });
 
 const LocationCard = (props) => {
-  const classes = useStyles();
+  // const classes = useStyles();
   const { location } = props;
   return (
-      <Card className={classes.root}>
+      <Card>
           <CardContent>
               <Typography variant="h5" component="h2">
                   {location.name}
