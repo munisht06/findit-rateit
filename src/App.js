@@ -1,6 +1,10 @@
 import logo from './logo.svg';
 import Map from './Maps';
 import './App.css';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 
 const campusAmenities = [
   {
@@ -114,6 +118,68 @@ const campusAmenities = [
     ],
   },
 ];
+
+//-------------------------------------------------------------------
+
+function Location({ location }) {
+  return (
+    <div>
+      <h2>{location.name}</h2>
+      <p>Type: {location.type}</p>
+      <p>Rating: {location.rating}</p>
+      <p>Comments: {location.comments}</p>
+    </div>
+  );
+}
+
+function LocationList() {
+  return (
+    <div>
+      {campusAmenities.map(location => (
+        <Location key={location.name} location={location} />
+      ))}
+    </div>
+  );
+}
+
+const useStyles = makeStyles({
+  root: {
+      minWidth: 275,
+  },
+});
+
+const LocationCard = (props) => {
+  const classes = useStyles();
+  const { location } = props;
+  return (
+      <Card className={classes.root}>
+          <CardContent>
+              <Typography variant="h5" component="h2">
+                  {location.name}
+              </Typography>
+              <Typography variant="body2" component="p">
+                  Type: {location.type}
+              </Typography>
+              <Typography variant="body2" component="p">
+                  Rating: {location.rating}
+              </Typography>
+              <Typography variant="body2" component="p">
+                  Comments: {location.comments}
+              </Typography>
+          </CardContent>
+      </Card>
+  );
+};
+
+const MyComponent = () => {
+  const location = { name: "My Location", type: "Restaurant", rating: 4, comments: "Great food and service!" };
+  return (
+      <div>
+          <LocationCard location={location} />
+      </div>
+  );
+}
+//-------------------------------------------------------------------
 
 function App() {
   return (
